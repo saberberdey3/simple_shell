@@ -11,11 +11,11 @@ int main(void)
 {
 	if (isatty(STDIN_FILENO) == 1)
 	{
-		my_intercative_mode(void);
+		my_intercative_mode;
 	}
 	else
 	{
-		my_non_interactive_mode(void);
+		my_non_interactive_mode;
 	}
 	return (0);
 }
