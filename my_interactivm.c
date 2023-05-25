@@ -1,6 +1,7 @@
 #include "my_shell.h"
+
 /**
- * signal_handler - function that terminal signals.
+ * signal_handler - function that handles terminal signals.
  * @signal_num: signal number.
  */
 void signal_handler(int signal_num)
@@ -9,8 +10,9 @@ void signal_handler(int signal_num)
 	write(STDOUT_FILENO, "\n", 2);
 	write(STDOUT_FILENO, "#cisfun$ ", 10);
 }
+
 /**
- * my_interactive_mode - the program in interactive mode.
+ * my_interactive_mode - runs the program in interactive mode.
  */
 void my_interactive_mode(void)
 {
@@ -23,19 +25,24 @@ void my_interactive_mode(void)
 	while (1)
 	{
 		write(STDOUT_FILENO, "#cisfun$ ", 10);
-		line = read_stdin();
+		line = my_read_stdin();
 		if (line != NULL)
 		{
-			cmds = tokeniz(line);
-			err_check = excutcmd(cmds);
+			cmds = my_tokeniz(line);
+			err_check = my_executcmd(cmds);
 			if (err_check > 0)
 			{
-				error(err_check, cmds, running);
+				my_error(err_check, cmds, running);
 			}
 			free(line);
 			free(cmds);
 		}
 		running++;
 	}
-	free(line);
+}
+
+int main(void)
+{
+	my_interactive_mode();
+	return 0;
 }
