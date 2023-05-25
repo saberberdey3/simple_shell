@@ -39,7 +39,7 @@ char *my_strcat(char *dest, char *src);
 int my_end(char **cmd);
 char *my_strcpy(char *dest, char *src);
 int my_env(char **cmd);
-char *my_strtok(char *str, char *delim);
+char *my_strtok_r(char *str, char *delim, char **saveptr);
 
 /* Structures */
 /**
