@@ -1,21 +1,22 @@
 #include "shell.h"
 
-char **commands = NULL;
-char *line = NULL;
-char *shell_name = NULL;
-int status = 0;
+
+	char **commands = NULL;
+	char *line = NULL;
+	char *shell_name = NULL;
+	int status = 0;
 
 /**
  * main - the main shell code
  * @argc: number of arguments passed
  * @argv: program arguments to be parsed
  *
- * Implements the shell functionality by utilizing functions from utils and helpers.
- * Handles EOF conditions.
- * Prints errors on failure.
- *
+ * applies the functions in utils and helpers
+ * implements EOF
+ * Prints error on Failure
  * Return: 0 on success
  */
+
 
 int main(int argc __attribute__((unused)), char **argv)
 {
@@ -25,43 +26,36 @@ int main(int argc __attribute__((unused)), char **argv)
 
 	signal(SIGINT, ctrl_c_handler);
 	shell_name = argv[0];
-
 	while (1)
 	{
-	non_interactive();
-	print(" ($) ", STDOUT_FILENO);
-
-	if (getline(&line, &n, stdin) == -1)
-	{
-		free(line);
-		exit(status);
-	}
-
-	remove_newline(line);
-	remove_comment(line);
-	commands = tokenizer(line, ";");
-
-	for (i = 0; commands[i] != NULL; i++)
-	{
-		current_command = tokenizer(commands[i], " ");
-
-		if (current_command[0] == NULL)
+		non_interactive();
+		print(" (ShellSN$) ", STDOUT_FILENO);
+		if (getline(&line, &n, stdin) == -1)
 		{
-		free(current_command);
-		break;
+			free(line);
+			exit(status);
 		}
+			remove_newline(line);
+			remove_comment(line);
+			commands = tokenizer(line, ";");
 
-		type_command = parse_command(current_command[0]);
+		for (i = 0; commands[i] != NULL; i++)
+		{
+			current_command = tokenizer(commands[i], " ");
+			if (current_command[0] == NULL)
+			{
+				free(current_command);
+				break;
+			}
+			type_command = parse_command(current_command[0]);
 
-		/* initializer - modify as needed */
-		initializer(current_command, type_command);
-
-		free(current_command);
+			/* initializer -   */
+			initializer(current_command, type_command);
+			free(current_command);
+		}
+		free(commands);
 	}
+	free(line);
 
-	free(commands);
-}
-
-free(line);
-return status;
+	return (status);
 }
