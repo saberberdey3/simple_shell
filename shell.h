@@ -20,6 +20,7 @@
 #define INTERNAL_COMMAND 2
 #define PATH_COMMAND 3
 #define INVALID_COMMAND -1
+#define READ_BUF_SIZE 1024
 
 #define min(x, y) (((x) < (y)) ? (x) : (y))
 
@@ -69,6 +70,7 @@ void execute_command(char **, int);
 char *check_path(char *);
 void (*get_func(char *))(char **);
 char *_getenv(char *);
+ssize_t custom_getline(char **line);
 
 /*built_in*/
 void env(char **);
