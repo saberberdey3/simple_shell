@@ -23,6 +23,12 @@
 
 #define min(x, y) (((x) < (y)) ? (x) : (y))
 
+/* Define the info_t type */
+typedef struct
+{
+}
+info_t;
+
 /**
  *struct map - a struct that maps a command name to a function
  *
