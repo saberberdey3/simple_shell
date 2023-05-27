@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "shell.h"
 
 /**
@@ -9,7 +6,8 @@
  *
  * Return: void
  */
-void env(char **tokenized_command __attribute__((unused))) {
+void env(char **tokenized_command __attribute__((unused))) 
+{
 int i;
 
 for (i = 0; environ[i] != NULL; i++) {
@@ -23,7 +21,8 @@ printf("%s\n", environ[i]);
  *
  * Return: void
  */
-void quit(char **tokenized_command) {
+void quit(char **tokenized_command)
+{
 int num_token = 0, arg;
 
 	for (; tokenized_command[num_token] != NULL; num_token++)
